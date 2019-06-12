@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="kb_products.commands.import" class="KbProducts\Commands\ImportCommand">
+            <tag name="console.command"/>
+        </service>
+
+
+
+        <service class="KbProducts\Components\Client" id="kb_products.components.client">
+        </service>
+
+
+
+        <service id="kb_products.subscriber.frontend" class="KbProducts\Subscriber\Frontend">
+            <argument type="service" id="service_container" />
+            <tag name="shopware.event_subscriber" />
+        </service>
+
+
+        <service id="kb_products.listing" class="KbProducts\Subscriber\Listing">
+            <argument type="service" id="service_container"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service class="KbProducts\Subscriber\OrderEDE" id="kb_products.subscribers.order_ede">
+            <argument type="service" id="service_container"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+
+
+
+        <service id="kb_products.detail" class="KbProducts\Subscriber\Detail">
+            <argument type="service" id="service_container"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+
+    </services>
+</container>
